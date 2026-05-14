@@ -216,7 +216,7 @@ function basicDetails(account: any) {
 }
 
 async function sendVerificationEmail(account: any, origin: string) {
-  const verifyUrl = `${origin}/accounts/verify-email?token=${account.verificationToken}`;
+  const verifyUrl = `${origin}/#/account/verify-email?token=${account.verificationToken}`;  // ✅ Fixed: /accounts/ → /account/
   await sendEmail({
     to: account.email,
     subject: 'Sign-up Verification - Verify Email',
@@ -230,7 +230,7 @@ async function sendVerificationEmail(account: any, origin: string) {
 }
 
 async function sendPasswordResetEmail(account: any, origin: string) {
-  const resetUrl = `${origin}/accounts/reset-password?token=${account.resetToken}`;
+  const resetUrl = `${origin}/#/account/reset-password?token=${account.resetToken}`;  // ✅ Fixed: /accounts/ → /account/
   await sendEmail({
     to: account.email,
     subject: 'Sign-up Verification - Reset Password',

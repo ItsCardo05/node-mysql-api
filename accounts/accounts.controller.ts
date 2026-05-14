@@ -146,7 +146,9 @@ function revokeToken(req: Request, res: Response, next: NextFunction) {
 }
 
 function register(req: Request, res: Response, next: NextFunction) {
-  accountService.register(req.body, req.get('origin') || `${req.protocol}://${req.get('host')}`)
+  // ✅ Hardcoded to Angular frontend URL so verification email links work correctly
+  const origin = 'http://localhost:4200';
+  accountService.register(req.body, origin)
     .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
     .catch(next);
 }
@@ -158,7 +160,9 @@ function verifyEmail(req: Request, res: Response, next: NextFunction) {
 }
 
 function forgotPassword(req: Request, res: Response, next: NextFunction) {
-  accountService.forgotPassword(req.body, req.get('origin') || `${req.protocol}://${req.get('host')}`)
+  // ✅ Hardcoded to Angular frontend URL so reset password email links work correctly
+  const origin = 'http://localhost:4200';
+  accountService.forgotPassword(req.body, origin)
     .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
     .catch(next);
 }
@@ -228,7 +232,8 @@ function _delete(req: Request, res: Response, next: NextFunction) {
 function setTokenCookie(res: Response, token: string) {
   const cookieOptions = {
     httpOnly: true,
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    sameSite: 'lax' as const  // ✅ fixed: allows cookie to be sent with cross-origin requests
   };
   res.cookie('refreshToken', token, cookieOptions);
 }

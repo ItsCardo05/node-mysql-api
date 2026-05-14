@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: 'http://localhost:4200', credentials: true })); // ✅ fixed CORS
 
 // Swagger docs
 setupSwagger(app);
@@ -34,7 +34,8 @@ initialize()
     });
   })
   .catch(err => {
-  console.error('❌ Failed to start server:', err);
-  process.exit(1);
-});
+    console.error('❌ Failed to start server:', err);
+    process.exit(1);
+  });
+
 export default app;
