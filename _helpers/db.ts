@@ -7,12 +7,23 @@ import { refreshTokenModel } from '../accounts/refresh-token.model';
 const db: any = {};
 
 export async function initialize() {
-  const { host, port, user, password, database } = config.database;
+  // Use environment variables if they exist (on Render), otherwise fall back to config.json (locally)
+  const host = process.env.DB_HOST || config.database.host;
+  const port = Number(process.env.DB_PORT) || config.database.port;
+  const user = process.env.DB_USER || config.database.user;
+  const password = process.env.DB_PASSWORD || config.database.password;
+  const database = process.env.DB_NAME || config.database.database;
 
-  // Create DB if not exists
-  const connection = await mysql2.createConnection({ host, port, user, password });
-  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
-  await connection.end();
+  // Create DB if not exists 
+  // Note: Hostinger usually doesn't allow creating databases via code, 
+  // but keeping this block safe with a try/catch prevents it from crashing your app.
+  try {
+    const connection = await mysql2.createConnection({ host, port, user, password });
+    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+    await connection.end();
+  } catch (err) {
+    console.log("Database check/creation skipped or handled by host provider.");
+  }
 
   // Connect with Sequelize
   const sequelize = new Sequelize(database, user, password, {
@@ -31,6 +42,8 @@ export async function initialize() {
   db.RefreshToken.belongsTo(db.Account);
 
   // Sync tables
+  // Since your Hostinger database is empty right now, this will automatically 
+  // build your Accounts and RefreshTokens tables upon successful startup!
   await sequelize.sync({ alter: true });
 
   db.sequelize = sequelize;
