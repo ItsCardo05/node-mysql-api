@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // ✅ Read CORS origin from environment variable, fallback to localhost for development
-const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:4200';
+const corsOrigin = process.env.CORS_ORIGIN || 'https://villegas-lab7-activity.vercel.app';
 app.use(cors({ 
   origin: corsOrigin.split(',').map(o => o.trim()),
   credentials: true 
