@@ -15,4 +15,4 @@ export async function sendEmail({ to, subject, html, from = config.emailFrom }: 
     subject,
     html
   });
-}
+} 

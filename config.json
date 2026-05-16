@@ -1,10 +1,10 @@
 {
   "database": {
-    "host": "localhost",
+    "host": "153.92.15.31",
     "port": 3306,
-    "user": "root",
-    "password": "",
-    "database": "node_boilerplate"
+    "user": "u875409848_villegas",
+    "password": "2qW^sUg=M",
+    "database": "u875409848_villegas"
   },
   "secret": "MY-SUPER-SECRET-JWT-KEY-CHANGE-THIS-IN-PRODUCTION",
   "emailFrom": "onboarding@resend.dev",
