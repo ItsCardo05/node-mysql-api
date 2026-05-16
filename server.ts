@@ -12,7 +12,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors({ origin: 'http://localhost:4200', credentials: true })); // ✅ fixed CORS
+
+// ✅ Read CORS origin from environment variable, fallback to localhost for development
+const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:4200';
+app.use(cors({ 
+  origin: corsOrigin.split(',').map(o => o.trim()),
+  credentials: true 
+}));
 
 // Swagger docs
 setupSwagger(app);
