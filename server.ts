@@ -13,13 +13,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// ✅ Read CORS origin from environment variable, fallback to localhost for development
-const corsOrigin = process.env.CORS_ORIGIN;
+// ✅ Allow both local and production origins
+const allowedOrigins = [
+  'http://localhost:4200',
+  'https://villegas-lab7-activity.vercel.app',
+  'https://villegas-lab7-activity-jetros-projects-bea062f9.vercel.app'
+];
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? (corsOrigin ? corsOrigin.split(',').map(x => x.trim()) : false)
-    : (origin, callback) => callback(null, true),
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
