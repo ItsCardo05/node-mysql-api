@@ -16,8 +16,7 @@ app.use(cookieParser());
 // ✅ Allow both local and production origins
 const allowedOrigins = [
   'http://localhost:4200',
-  'https://villegas-lab7-activity.vercel.app',
-  'https://villegas-lab7-activity-jetros-projects-bea062f9.vercel.app'
+  'https://bajejr-lab7.onrender.com'
 ];
 
 app.use(cors({
