@@ -2,9 +2,9 @@
   "database": {
     "host": "153.92.15.31",
     "port": 3306,
-    "user": "u875409848_villegas",
+    "user": "u875409848_baje",
     "password": "2qW^sUg=M",
-    "database": "u875409848_villegas"
+    "database": "u875409848_baje"
   },
   "secret": "MY-SUPER-SECRET-JWT-KEY-CHANGE-THIS-IN-PRODUCTION",
   "emailFrom": "onboarding@resend.dev",

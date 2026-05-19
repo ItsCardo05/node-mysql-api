@@ -15,7 +15,23 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
-app.use((0, cors_1.default)({ origin: '*', credentials: true }));
+// ✅ Allow both local and production origins
+const allowedOrigins = [
+    'http://localhost:4200',
+    'https://villegas-lab7-activity.vercel.app',
+    'https://villegas-lab7-activity-jetros-projects-bea062f9.vercel.app'
+];
+app.use((0, cors_1.default)({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 // Swagger docs
 (0, swagger_1.setupSwagger)(app);
 // Routes
@@ -32,7 +48,7 @@ const PORT = process.env.PORT || 4000;
     });
 })
     .catch(err => {
-    console.error('❌ Failed to start server:', err.message);
+    console.error('❌ Failed to start server:', err);
     process.exit(1);
 });
 exports.default = app;
