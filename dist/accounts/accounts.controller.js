@@ -131,7 +131,7 @@ function revokeToken(req, res, next) {
 }
 function register(req, res, next) {
     // ✅ Hardcoded to Angular frontend URL so verification email links work correctly
-    const origin = 'https://villegas-lab7-activity.vercel.app';
+    const origin = 'https://itscardo05.github.io/BajeJr-Lab7';
     account_service_1.accountService.register(req.body, origin)
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
@@ -143,7 +143,7 @@ function verifyEmail(req, res, next) {
 }
 function forgotPassword(req, res, next) {
     // ✅ Hardcoded to Angular frontend URL so reset password email links work correctly
-    const origin = 'https://villegas-lab7-activity.vercel.app';
+    const origin = 'https://itscardo05.github.io/BajeJr-Lab7';
     account_service_1.accountService.forgotPassword(req.body, origin)
         .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
         .catch(next);
