@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { Op } from 'sequelize';
 import config from '../config.json';
+const secret = process.env.JWT_SECRET || config.secret;
 import db from '../_helpers/db';
 import { Role } from '../_helpers/role';
 import { sendEmail } from '../_helpers/send-email';

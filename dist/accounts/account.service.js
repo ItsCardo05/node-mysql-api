@@ -9,6 +9,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crypto_1 = __importDefault(require("crypto"));
 const sequelize_1 = require("sequelize");
 const config_json_1 = __importDefault(require("../config.json"));
+const secret = process.env.JWT_SECRET || config_json_1.default.secret;
 const db_1 = __importDefault(require("../_helpers/db"));
 const role_1 = require("../_helpers/role");
 const send_email_1 = require("../_helpers/send-email");
