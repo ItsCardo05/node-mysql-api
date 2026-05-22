@@ -161,7 +161,7 @@ async function hash(password) {
     return bcryptjs_1.default.hash(password, 10);
 }
 function generateJwtToken(account) {
-    return jsonwebtoken_1.default.sign({ id: account.id }, config_json_1.default.secret, { expiresIn: '15m' });
+    return jsonwebtoken_1.default.sign({ id: account.id }, secret, { expiresIn: '15m' });
 }
 async function generateRefreshToken(account, ipAddress) {
     return db_1.default.RefreshToken.build({

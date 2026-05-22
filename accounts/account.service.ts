@@ -195,7 +195,7 @@ async function hash(password: string) {
 }
 
 function generateJwtToken(account: any) {
-  return jwt.sign({ id: account.id }, config.secret, { expiresIn: '15m' });
+  return jwt.sign({ id: account.id }, secret, { expiresIn: '15m' });
 }
 
 async function generateRefreshToken(account: any, ipAddress: string) {
